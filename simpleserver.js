@@ -1,12 +1,13 @@
 "use strict";
-var port, server, service,
-    system = require('system');
+var server, service,
+    system = require('system'),
+    port = 4242
+    ;
 
-if (system.args.length !== 2) {
-    console.log('Usage: simpleserver.js <portnumber>');
+if (system.args.length !== 1) {
+    console.log('Usage: simpleserver.js');
     phantom.exit(1);
 } else {
-    port = system.args[1];
     server = require('webserver').create();
 
     service = server.listen(port, function (request, response) {
