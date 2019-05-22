@@ -28,7 +28,7 @@ service = server.listen(port, function (request, response) {
 	/**
 	 * @method page.content
 	 * @param $url
-	 * @param $settings http://phantomjs.org/api/webpage/property/settings.html
+	 * @param $settings optional http://phantomjs.org/api/webpage/property/settings.html
 	 **/
 
 	if (query.method == 'page.content'){

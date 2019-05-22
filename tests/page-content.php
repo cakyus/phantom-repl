@@ -19,8 +19,6 @@
  * @link http://phantomjs.org/api/webpage/method/open.html
  **/
 
-$settings = new \stdClass;
-
 $options = array(
 	'http' => array(
 		  'method'  => 'POST'
@@ -29,8 +27,7 @@ $options = array(
 			  'jsonrpc' => '2.0'
 			, 'method' => 'page.content'
 			, 'params' => array(
-					  'url' => 'http://127.0.0.1:8000'
-					, 'settings' => $settings
+					  'url' => 'https://www.google.com'
 				)
 			))
 	)
