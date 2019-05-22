@@ -16,7 +16,7 @@ PhantomJS is now listening for connections on the default port 4242.
       --post-data='{"jsonrpc":"2.0","method":"page.content","params":{"url":"https://www.google.com"}}' \
       http://127.0.0.1:4242
 
-Ask PhantomJS to print the content of https://www.google.com to standard output.
+Ask PhantomJS to print the content of https://www.google.com.
 
     $ wget -O - --post-data='{"jsonrpc": "2.0", "method": "phantom.exit"}' http://127.0.0.1:4242/
 
