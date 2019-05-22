@@ -4,20 +4,18 @@ var server, service,
     port = 4242
     ;
 
-var query, queryLine, queryItem;
-
-var i;
-
 server = require('webserver').create();
 service = server.listen(port, function (request, response) {
 
 	// parse request
 
-	query = JSON.parse(request.postRaw);
+	var query = JSON.parse(request.postRaw);
 
 	console.log('Request-Data: '+JSON.stringify(query));
 
-	// object phantom
+	/**
+	 * @method phantom.exit
+	 **/
 
 	if (query.method == 'phantom.exit'){
 		response.statusCode = 200;
@@ -25,6 +23,32 @@ service = server.listen(port, function (request, response) {
 		response.write('200 OK');
 		response.close();
 		phantom.exit();
+	}
+
+	/**
+	 * @method page.content
+	 * @param $url
+	 * @param $settings http://phantomjs.org/api/webpage/property/settings.html
+	 **/
+
+	if (query.method == 'page.content'){
+		var webpage = require('webpage');
+		var page = webpage.create();
+		page.open(query.params.url, query.params.settings, function(status){
+			if (status == 'success'){
+				response.statusCode = 200;
+				response.headers = { 'Cache': 'no-cache', 'Content-Type': 'text/plain' };
+				response.write(page.content);
+				response.close();
+				return true;
+			}
+			response.statusCode = 500;
+			response.headers = { 'Cache': 'no-cache', 'Content-Type': 'text/plain' };
+			response.write(page.content);
+			response.close();
+			return true;
+		});
+		return true;
 	}
 
 	response.statusCode = 400;
